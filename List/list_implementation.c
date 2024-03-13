@@ -39,7 +39,7 @@ void update(struct  List* list, int data, int position) {
 void display(struct List* list){
     printf("List:");
     for (int i=0; i<list->size; i++) {
-        printf("%d",list->arr[i]);
+        printf("%d\t",list->arr[i]);
     }
     printf("\n");
 }
