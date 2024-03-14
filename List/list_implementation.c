@@ -27,6 +27,11 @@ void removeElement(struct List* list, int position) {
         printf("Invalid position!\n");
         return;
     }
+
+    //Shift elements to the left to remove the element at the given position
+    for (int i=position; i<list->size-1; i++) {
+        list->arr[i]=list->arr[i+1];
+    }
     list->size--;
 }
 void update(struct  List* list, int data, int position) {
