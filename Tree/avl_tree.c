@@ -140,13 +140,12 @@ struct Node* insert(struct Node* node, int key)
     return node; 
 } 
   
-// A utility function to print preorder traversal 
-// of the tree. 
-// The function also prints height of every node 
+// A utility function to print preorder traversal of the tree. 
+// The function also prints height of every node. 
 void preOrder(struct Node *root) 
 { 
     if(root != NULL) 
-    { 
+    {
         printf("%d ", root->key); 
         preOrder(root->left); 
         preOrder(root->right); 

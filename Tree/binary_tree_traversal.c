@@ -37,7 +37,6 @@ struct node* createNode(value) {
     newNode->item = value;
     newNode->left = NULL;
     newNode->right = NULL;
-
     return newNode;
 }
 

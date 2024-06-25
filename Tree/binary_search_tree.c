@@ -118,6 +118,6 @@ int main() {
     printf("In-order traversal after deletion: ");
     inorderTraversal(root);
     printf("\n");
-
+    
     return 0;
 }
