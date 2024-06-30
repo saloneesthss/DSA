@@ -49,7 +49,7 @@ void displayList (struct Node* head)
     }
     struct Node* temp=head->next;
     do {
-        printf("%d",temp->data);
+        printf("%d\t",temp->data);
         temp=temp->next;
     } while (temp!=head->next);
     printf("\n");
