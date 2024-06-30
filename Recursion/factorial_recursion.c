@@ -1,9 +1,7 @@
 #include <stdio.h>
 long int factorial(int n);
 int main() {
-    int fact,i,n;
-    printf("Enter a positive integer:");
-    scanf("%d",&n);
+    int n=5;
     printf("The factorial of %d is: %d",n,factorial(n));
     return 0;
 }
