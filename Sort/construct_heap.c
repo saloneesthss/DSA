@@ -53,7 +53,7 @@ void printHeap(int arr[], int N)
     printf("Array representation of Heap is:\n");
  
     for (int i = 0; i < N; ++i)
-        printf("%d ",arr[i]);
+        printf("%d\t",arr[i]);
     printf("\n");
 }
  

@@ -36,7 +36,7 @@ int main()
 
     printf("Unsorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     printf("\n");
 
@@ -44,7 +44,7 @@ int main()
 
     printf("Sorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     printf("\n");
 
