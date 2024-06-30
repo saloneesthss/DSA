@@ -6,7 +6,7 @@ int main()
 
     printf("Unsorted array: ");
     for (int i=0; i<n; i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     //Main logic starts here
     for (int i=1;i<n;i++) {
@@ -22,7 +22,7 @@ int main()
 
     printf("\nSorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     return 0;
 }

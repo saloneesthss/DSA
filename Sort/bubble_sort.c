@@ -7,9 +7,10 @@ int main()
 
     printf("Unsorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
-    
+    printf("\n");
+
     for (int i=0;i<n;i++) {
         for (int j=0;j<n-1;j++) {
             if (arr[j]>arr[j+1]) {
@@ -21,7 +22,7 @@ int main()
     }
     printf("Sorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     return 0;
 }

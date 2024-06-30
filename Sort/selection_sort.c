@@ -9,12 +9,12 @@ void swap(int *a, int *b)
 
 int main() 
 {
-    int arr[]={5,4,6,2,11};
+    int arr[]={5,4,8,3,11};
     int n=sizeof(arr)/sizeof(arr[0]);
 
     printf("Unsorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
 
     //Main logic starts here
@@ -35,7 +35,7 @@ int main()
 
     printf("\nSorted array: ");
     for (int i=0;i<n;i++) {
-        printf("%d",arr[i]);
+        printf("%d\t",arr[i]);
     }
     return 0;
 }

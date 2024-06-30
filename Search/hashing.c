@@ -1,169 +1,146 @@
+// C program for the above approach
 #include <stdio.h>
 #include <stdlib.h>
 
-struct set
-{
-  int key;
-  int data;
+struct HashNode {
+	int key;
+	int value;
 };
-struct set *array;
-int capacity = 10;
+
+const int capacity = 20;
 int size = 0;
 
-int hashFunction(int key)
+struct HashNode** arr;
+struct HashNode* dummy;
+
+// Function to add key value pair
+void insert(int key, int V)
 {
-  return (key % capacity);
-}
-int checkPrime(int n)
-{
-  int i;
-  if (n == 1 || n == 0)
-  {
-  return 0;
-  }
-  for (i = 2; i < n / 2; i++)
-  {
-  if (n % i == 0)
-  {
-    return 0;
-  }
-  }
-  return 1;
-}
-int getPrime(int n)
-{
-  if (n % 2 == 0)
-  {
-  n++;
-  }
-  while (!checkPrime(n))
-  {
-  n += 2;
-  }
-  return n;
-}
-void init_array()
-{
-  capacity = getPrime(capacity);
-  array = (struct set *)malloc(capacity * sizeof(struct set));
-  for (int i = 0; i < capacity; i++)
-  {
-  array[i].key = 0;
-  array[i].data = 0;
-  }
+
+	struct HashNode* temp
+		= (struct HashNode*)malloc(sizeof(struct HashNode));
+	temp->key = key;
+	temp->value = V;
+
+	// Apply hash function to find
+	// index for given key
+	int hashIndex = key % capacity;
+
+	// Find next free space
+	while (arr[hashIndex] != NULL
+		&& arr[hashIndex]->key != key
+		&& arr[hashIndex]->key != -1) {
+		hashIndex++;
+		hashIndex %= capacity;
+	}
+
+	// If new node to be inserted
+	// increase the current size
+	if (arr[hashIndex] == NULL
+		|| arr[hashIndex]->key == -1)
+		size++;
+
+	arr[hashIndex] = temp;
 }
 
-void insert(int key, int data)
+// Function to delete a key value pair
+int delete (int key)
 {
-  int index = hashFunction(key);
-  if (array[index].data == 0)
-  {
-  array[index].key = key;
-  array[index].data = data;
-  size++;
-  printf("\n Key (%d) has been inserted \n", key);
-  }
-  else if (array[index].key == key)
-  {
-  array[index].data = data;
-  }
-  else
-  {
-  printf("\n Collision occured  \n");
-  }
+	// Apply hash function to find
+	// index for given key
+	int hashIndex = key % capacity;
+
+	// Finding the node with given
+	// key
+	while (arr[hashIndex] != NULL) {
+		// if node found
+		if (arr[hashIndex]->key == key) {
+			// Insert dummy node here
+			// for further use
+			arr[hashIndex] = dummy;
+
+			// Reduce size
+			size--;
+
+			// Return the value of the key
+			return 1;
+		}
+		hashIndex++;
+		hashIndex %= capacity;
+	}
+
+	// If not found return null
+	return 0;
 }
 
-void remove_element(int key)
+// Function to search the value
+// for a given key
+int find(int key)
 {
-  int index = hashFunction(key);
-  if (array[index].data == 0)
-  {
-  printf("\n This key does not exist \n");
-  }
-  else
-  {
-  array[index].key = 0;
-  array[index].data = 0;
-  size--;
-  printf("\n Key (%d) has been removed \n", key);
-  }
-}
-void display()
-{
-  int i;
-  for (i = 0; i < capacity; i++)
-  {
-  if (array[i].data == 0)
-  {
-    printf("\n array[%d]: / ", i);
-  }
-  else
-  {
-    printf("\n key: %d array[%d]: %d \t", array[i].key, i, array[i].data);
-  }
-  }
+	// Apply hash function to find
+	// index for given key
+	int hashIndex = (key % capacity);
+
+	int counter = 0;
+
+	// Find the node with given key
+	while (arr[hashIndex] != NULL) {
+
+		int counter = 0;
+		// If counter is greater than
+		// capacity
+		if (counter++ > capacity)
+			break;
+
+		// If node found return its
+		// value
+		if (arr[hashIndex]->key == key)
+			return arr[hashIndex]->value;
+
+		hashIndex++;
+		hashIndex %= capacity;
+	}
+
+	// If not found return
+	// -1
+	return -1;
 }
 
-int size_of_hashtable()
-{
-  return size;
-}
-
+// Driver Code
 int main()
 {
-  int choice, key, data, n;
-  int c = 0;
-  init_array();
+	// Space allocation
+	arr = (struct HashNode**)malloc(sizeof(struct HashNode*)
+									* capacity);
+	// Assign NULL initially
+	for (int i = 0; i < capacity; i++)
+		arr[i] = NULL;
 
-  do
-  {
-  printf("1.Insert item in the Hash Table"
-     "\n2.Remove item from the Hash Table"
-     "\n3.Check the size of Hash Table"
-     "\n4.Display a Hash Table"
-     "\n\n Please enter your choice: ");
+	dummy
+		= (struct HashNode*)malloc(sizeof(struct HashNode));
 
-  scanf("%d", &choice);
-  switch (choice)
-  {
-  case 1:
+	dummy->key = -1;
+	dummy->value = -1;
 
-    printf("Enter key -:\t");
-    scanf("%d", &key);
-    printf("Enter data -:\t");
-    scanf("%d", &data);
-    insert(key, data);
+	insert(1, 5);
+	insert(2, 15);
+	insert(3, 20);
+	insert(4, 7);
 
-    break;
+	if (find(4) != -1)
+		printf("Value of Key 4 = %d\n", find(4));
+	else
+		printf("Key 4 does not exists\n");
 
-  case 2:
+	if (delete (4))
+		printf("Node value of key 4 is deleted "
+			"successfully\n");
+	else {
+		printf("Key does not exists\n");
+	}
 
-    printf("Enter the key to delete-:");
-    scanf("%d", &key);
-    remove_element(key);
-
-    break;
-
-  case 3:
-
-    n = size_of_hashtable();
-    printf("Size of Hash Table is-:%d\n", n);
-
-    break;
-
-  case 4:
-
-    display();
-
-    break;
-
-  default:
-
-    printf("Invalid Input\n");
-  }
-
-  printf("\nDo you want to continue (press 1 for yes): ");
-  scanf("%d", &c);
-
-  } while (c == 1);
+	if (find(4) != -1)
+		printf("Value of Key 4 = %d\n", find(4));
+	else
+		printf("Key 4 does not exists\n");
 }
